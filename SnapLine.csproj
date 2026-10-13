@@ -7,8 +7,8 @@
     <ProjectGuid>{A8D8B6F9-76C1-41BC-BA92-3B7D764A895F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Portafotos</RootNamespace>
-    <AssemblyName>Portafotos</AssemblyName>
+    <RootNamespace>SnapLine</RootNamespace>
+    <AssemblyName>SnapLine</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>

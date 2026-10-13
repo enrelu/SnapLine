@@ -1,2 +1,2 @@
 @echo off
-start "" "%~dp0bin\Release\Portafotos.exe"
+start "" "%~dp0bin\Release\SnapLine.exe"

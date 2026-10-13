@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Portafotos.Services
+namespace SnapLine.Services
 {
     public class HotKeyManager : IDisposable
     {

@@ -6,10 +6,10 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using Portafotos.Services;
+using SnapLine.Services;
 using Point = System.Windows.Point;
 
-namespace Portafotos.Windows
+namespace SnapLine.Windows
 {
     public partial class SnipperOverlayWindow : Window
     {
@@ -160,7 +160,7 @@ namespace Portafotos.Windows
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("Error al guardar captura: " + ex.Message, "Portafotos", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Error al guardar captura: " + ex.Message, "SnapLine", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
             }
         }

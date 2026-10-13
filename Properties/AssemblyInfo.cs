@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Portafotos")]
-[assembly: AssemblyDescription("Gestor ultra-ligero de capturas de pantalla")]
+[assembly: AssemblyTitle("SnapLine")]
+[assembly: AssemblyDescription("Ultra-lightweight screenshot manager for Windows")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Portafotos")]
-[assembly: AssemblyProduct("Portafotos")]
+[assembly: AssemblyCompany("enrelu")]
+[assembly: AssemblyProduct("SnapLine")]
 [assembly: AssemblyCopyright("Copyright © 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

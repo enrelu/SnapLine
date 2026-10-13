@@ -5,12 +5,12 @@ using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
-using Portafotos.Services;
-using Portafotos.Windows;
+using SnapLine.Services;
+using SnapLine.Windows;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
-namespace Portafotos
+namespace SnapLine
 {
     public partial class App : Application
     {
@@ -28,12 +28,12 @@ namespace Portafotos
             base.OnStartup(e);
 
             // Prevenir multiples instancias
-            const string mutexName = "Portafotos_App_SingleInstance_Mutex";
+            const string mutexName = "SnapLine_App_SingleInstance_Mutex";
             bool isNewInstance;
             _mutex = new Mutex(true, mutexName, out isNewInstance);
             if (!isNewInstance)
             {
-                MessageBox.Show("Portafotos ya se está ejecutando en segundo plano.", "Portafotos", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("SnapLine ya se está ejecutando en segundo plano.", "SnapLine", MessageBoxButton.OK, MessageBoxImage.Information);
                 Shutdown();
                 return;
             }
@@ -92,7 +92,7 @@ namespace Portafotos
         private void SetupTrayIcon()
         {
             _notifyIcon = new NotifyIcon();
-            _notifyIcon.Text = "Portafotos - Tendedero de Capturas";
+            _notifyIcon.Text = "SnapLine - Clothesline Screenshot Manager";
             _notifyIcon.Icon = GenerateAppIcon();
             _notifyIcon.Visible = true;
 
@@ -101,7 +101,7 @@ namespace Portafotos
             menu.Items.Add("🧺 Ver tendedero de fotos", null, (s, e) => _clotheslineWindow.ShowAndSlideIn());
             menu.Items.Add("📁 Abrir carpeta de capturas", null, (s, e) => OpenCapturesFolder());
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add("❌ Salir de Portafotos", null, (s, e) => ExitApplication());
+            menu.Items.Add("❌ Salir de SnapLine", null, (s, e) => ExitApplication());
 
             _notifyIcon.ContextMenuStrip = menu;
             _notifyIcon.DoubleClick += (s, e) => _clotheslineWindow.ShowAndSlideIn();
@@ -173,7 +173,7 @@ namespace Portafotos
             catch (Exception ex)
             {
                 _isSnipping = false;
-                MessageBox.Show("Error al iniciar captura: " + ex.Message, "Portafotos", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error al iniciar captura: " + ex.Message, "SnapLine", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

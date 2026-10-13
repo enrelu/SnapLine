@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Web.Script.Serialization;
 using System.Windows;
-using Portafotos.Models;
+using SnapLine.Models;
 
-namespace Portafotos.Services
+namespace SnapLine.Services
 {
     public class StorageService
     {
@@ -25,7 +25,7 @@ namespace Portafotos.Services
 
         public StorageService()
         {
-            _appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Portafotos");
+            _appFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SnapLine");
             _capturesFolder = Path.Combine(_appFolder, "Capturas");
             _historyFile = Path.Combine(_appFolder, "history.json");
             _serializer = new JavaScriptSerializer();

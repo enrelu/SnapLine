@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Portafotos.Models
+namespace SnapLine.Models
 {
     public class CaptureItem : INotifyPropertyChanged
     {

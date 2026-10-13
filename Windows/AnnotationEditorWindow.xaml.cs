@@ -7,12 +7,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Portafotos.Models;
-using Portafotos.Services;
+using SnapLine.Models;
+using SnapLine.Services;
 using Path = System.IO.Path;
 using Point = System.Windows.Point;
 
-namespace Portafotos.Windows
+namespace SnapLine.Windows
 {
     public partial class AnnotationEditorWindow : Window
     {

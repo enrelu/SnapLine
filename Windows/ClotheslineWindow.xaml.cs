@@ -7,10 +7,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Portafotos.Models;
-using Portafotos.Services;
+using SnapLine.Models;
+using SnapLine.Services;
 
-namespace Portafotos.Windows
+namespace SnapLine.Windows
 {
     public partial class ClotheslineWindow : Window
     {
