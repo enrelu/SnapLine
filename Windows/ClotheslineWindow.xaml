@@ -1,0 +1,259 @@
+<Window x:Class="Portafotos.Windows.ClotheslineWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Tendedero de Capturas"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        Height="195"
+        Visibility="Hidden"
+        WindowStartupLocation="Manual"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave"
+        Deactivated="Window_Deactivated"
+        KeyDown="Window_KeyDown">
+
+    <Window.Resources>
+        <!-- Estilo para boton X de descolgar de la tarjeta -->
+        <Style x:Key="CloseCardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#EF4444" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="22" />
+            <Setter Property="Height" Value="22" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="11">
+                            <Path Data="M 6,6 L 14,14 M 14,6 L 6,14"
+                                  Stroke="#FFFFFF"
+                                  StrokeThickness="2"
+                                  StrokeStartLineCap="Round"
+                                  StrokeEndLineCap="Round"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background" Value="#DC2626" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Estilo para boton de editar en tarjeta -->
+        <Style x:Key="EditCardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#3B82F6" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="22" />
+            <Setter Property="Height" Value="22" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="11">
+                            <Path Data="M 11,4 L 14,7 L 7,14 L 4,14 L 4,11 Z"
+                                  Stroke="#FFFFFF"
+                                  StrokeThickness="1.5"
+                                  Fill="#FFFFFF"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background" Value="#2563EB" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="RootContainer" Background="Transparent">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="SlideTransform" Y="-200" />
+        </Grid.RenderTransform>
+
+        <!-- CUERDA DE TENDER DE CÁÑAMO ELEGANTE (SIN FONDOS OSCUROS) -->
+        <Grid Height="12" VerticalAlignment="Top" Margin="15,10,15,0">
+            <!-- Sombra sutil de la cuerda -->
+            <Rectangle Height="2" Fill="#30000000" VerticalAlignment="Bottom" Margin="0,0,0,1" />
+
+            <!-- Cuerda trenzada natural -->
+            <Rectangle Height="3.5" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#C9A367" Offset="0.0" />
+                        <GradientStop Color="#DEB880" Offset="0.3" />
+                        <GradientStop Color="#9B7038" Offset="0.8" />
+                        <GradientStop Color="#6B4B21" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <!-- Remaches/anillas metálicas de sujeción en los extremos -->
+            <Ellipse Width="10" Height="10" Fill="#78716C" HorizontalAlignment="Left" Margin="2,1,0,0">
+                <Ellipse.Effect>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.4" />
+                </Ellipse.Effect>
+            </Ellipse>
+
+            <Ellipse Width="10" Height="10" Fill="#78716C" HorizontalAlignment="Right" Margin="0,1,2,0">
+                <Ellipse.Effect>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.4" />
+                </Ellipse.Effect>
+            </Ellipse>
+
+            <!-- Boton sutil de cerrar la cuerda -->
+            <Button x:Name="DismissClotheslineButton"
+                    Width="18"
+                    Height="18"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0,0,24,0"
+                    Cursor="Hand"
+                    ToolTip="Ocultar cuerda (Esc)"
+                    Click="DismissClotheslineButton_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#CC475569" CornerRadius="9">
+                            <Path Data="M 5,5 L 11,11 M 11,5 L 5,11"
+                                  Stroke="#FFFFFF"
+                                  StrokeThickness="1.5"
+                                  StrokeStartLineCap="Round"
+                                  StrokeEndLineCap="Round"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <!-- CONTENEDOR DESLIZABLE DE LAS CAPTURAS COLGADAS -->
+        <ScrollViewer x:Name="CapturesScrollViewer"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Disabled"
+                      PreviewMouseWheel="CapturesScrollViewer_PreviewMouseWheel"
+                      Margin="25,2,25,0"
+                      Background="Transparent">
+            <ItemsControl x:Name="CapturesItemsControl" ItemsSource="{Binding ActiveCaptures}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="12,0,12,0"
+                              Cursor="Hand"
+                              MouseEnter="Card_MouseEnter"
+                              MouseLeave="Card_MouseLeave"
+                              MouseLeftButtonDown="Card_MouseLeftButtonDown"
+                              MouseLeftButtonUp="Card_MouseLeftButtonUp"
+                              MouseMove="Card_MouseMove">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1" />
+                                    <RotateTransform Angle="{Binding TiltAngle}" />
+                                    <TranslateTransform x:Name="CardDropTransform" Y="0" />
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+
+                            <!-- PINZA DE MADERA REALISTA -->
+                            <Canvas Width="16" Height="28"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Panel.ZIndex="10"
+                                    Margin="0,0,0,0">
+                                <!-- Brazo de madera izquierdo con sombreado -->
+                                <Path Data="M 3,0 L 7,0 L 6,24 L 3,24 Z" Fill="#C89D66">
+                                    <Path.Effect>
+                                        <DropShadowEffect BlurRadius="3" ShadowDepth="1.5" Opacity="0.35" Direction="315" />
+                                    </Path.Effect>
+                                </Path>
+                                <!-- Brazo de madera derecho -->
+                                <Path Data="M 8,0 L 12,0 L 12,24 L 9,24 Z" Fill="#B5864F" />
+                                <!-- Anilla de alambre de muelle metálico -->
+                                <Rectangle Canvas.Left="4" Canvas.Top="9" Width="7" Height="4" Fill="#9E9E9E" RadiusX="1" RadiusY="1" />
+                                <Ellipse Canvas.Left="5" Canvas.Top="10" Width="5" Height="2" Fill="#616161" />
+                            </Canvas>
+
+                            <!-- TARJETA POLAROID BLANCA CON SOMBRA NATURAL FLOTANTE -->
+                            <Border x:Name="CardBorder"
+                                    Width="152"
+                                    Height="132"
+                                    Margin="0,12,0,0"
+                                    Background="#FFFFFF"
+                                    CornerRadius="4"
+                                    BorderBrush="#E2E8F0"
+                                    BorderThickness="1">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="14" Opacity="0.38" ShadowDepth="4" Direction="270" />
+                                </Border.Effect>
+
+                                <Grid Margin="5,5,5,6">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Imagen de la captura -->
+                                    <Border Grid.Row="0"
+                                            Background="#F8FAFC"
+                                            CornerRadius="2"
+                                            ClipToBounds="True">
+                                        <Image Source="{Binding Thumbnail}"
+                                               Stretch="Uniform"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <!-- Hora en estilo polaroid en el pie -->
+                                    <TextBlock Grid.Row="1"
+                                               Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss}'}"
+                                               Foreground="#64748B"
+                                               FontSize="9.5"
+                                               FontFamily="Segoe UI"
+                                               FontWeight="SemiBold"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,3,0,0" />
+
+                                    <!-- Botones de accion en hover (X y Editar) -->
+                                    <StackPanel x:Name="ActionButtonsPanel"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Margin="0,2,2,0"
+                                                Visibility="Collapsed">
+                                        <Button Style="{StaticResource EditCardButtonStyle}"
+                                                ToolTip="Editar captura"
+                                                Click="EditButton_Click"
+                                                Tag="{Binding}"
+                                                Margin="0,0,4,0" />
+                                        <Button Style="{StaticResource CloseCardButtonStyle}"
+                                                ToolTip="Quitar de la cuerda"
+                                                Click="CloseButton_Click"
+                                                Tag="{Binding}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

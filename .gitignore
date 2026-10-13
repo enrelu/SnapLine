@@ -1,0 +1,28 @@
+## Visual Studio y .NET
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+## Archivos de usuario y cache
+*.user
+*.userprefs
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+
+## Archivos generados
+*.pdb
+*.baml
+*.g.cs
+*.g.resources
+*.cache
+
+## Sistema operativo
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.tmp
+*.log
